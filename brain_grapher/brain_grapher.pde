@@ -246,12 +246,12 @@ void draw() {
                   println("writing l");
                   tomClient.write('l');
                   
-                } else if (pDeltaValue < curDeltaValue){
+                } else if (pDVZone < curDVZone){
                           
                   println("writing u");
                   tomClient.write('u');        
                   
-                } else if (pDeltaValue > curDeltaValue){
+                } else if (pDVZone > curDVZone){
                           
                   println("writing d");
                   tomClient.write('d');        
