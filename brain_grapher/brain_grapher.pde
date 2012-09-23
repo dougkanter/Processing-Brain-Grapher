@@ -140,17 +140,17 @@ void draw() {
 		monitors[i].draw();
 
                 int curAttnValue = monitors[0].currentValue;
-                int curDeltaValue = monitors[3].currentValue;
+                int curDeltaValue = monitors[1].currentValue;
 
                 if(pAttnValue < curAttnValue){
                   
-                  println("writing l");
-                  tomClient.write('l');
-                  
-                } else if (pAttnValue > curAttnValue){
-                  
                   println("writing r");
                   tomClient.write('r');
+                  
+                } else if (pAttnValue > curAttnValue ){
+                  
+                  println("writing l");
+                  tomClient.write('l');
                   
                 } else if (pDeltaValue < curDeltaValue){
                           
@@ -216,6 +216,11 @@ void clientEvent(Client  myClient) {
 
 }
 
+void keyReleased() {
+  // send out anything that's typed:
+  println("writing x");
+  tomClient.write(key);
+}
 
 // Extend core's Map function to the Long datatype.
 long mapLong(long x, long in_min, long in_max, long out_min, long out_max)  { 
