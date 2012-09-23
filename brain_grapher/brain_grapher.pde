@@ -12,6 +12,8 @@ String tomData;                       // string to hold incoming data
 String tomIp = "128.122.151.164";
 int pAttnValue = 0;
 int pDeltaValue = 0;
+int pAVZone = 0;
+int pDVZone = 0;
 Channel[] channels = new Channel[11];
 Monitor[] monitors = new Monitor[10];
 Graph graph;
@@ -141,13 +143,36 @@ void draw() {
 
                 int curAttnValue = monitors[0].currentValue;
                 int curDeltaValue = monitors[1].currentValue;
-
-                if(pAttnValue < curAttnValue){
+                int curAVZone = 2;
+                int curDVZone = 2;
+                
+                if(curAttnValue>=100 && curAttnValue<120){
+                  curAVZone = 1;
+                } else if (curAttnValue>=120 && curAttnValue<140){
+                  curAVZone = 2;
+                } else if (curAttnValue>=140 && curAttnValue<160){
+                  curAVZone = 3;
+                } else if (curAttnValue>=160 && curAttnValue<180){
+                  curAVZone = 4;
+                } else if (curAttnValue>=180 && curAttnValue<200){
+                  curAVZone = 5;
+                } else if (curAttnValue>=200 && curAttnValue<220){
+                  curAVZone = 6;
+                } else if (curAttnValue>=220 && curAttnValue<240){
+                  curAVZone = 7; 
+                } else if (curAttnValue>=240 && curAttnValue<260){
+                  curAVZone = 8;
+                } else if (curAttnValue>=260 && curAttnValue<=280){
+                  curAVZone = 9;
+                }
+                
+                println("curAttnValue: " + curAttnValue + " pAttnValue: " + pAttnValue + " curAVZone: " + curAVZone + " pAVZone: " + pAVZone);
+                if(pAVZone < curAVZone){
                   
                   println("writing r");
                   tomClient.write('r');
                   
-                } else if (pAttnValue > curAttnValue ){
+                } else if (pAVZone > curAVZone ){
                   
                   println("writing l");
                   tomClient.write('l');
@@ -165,7 +190,9 @@ void draw() {
                 }
 
                 pAttnValue = curAttnValue;
+                pAVZone = curAVZone;
                 pDeltaValue = curDeltaValue;
+                pDVZone = curDVZone;
                 
 	}
 	
@@ -232,3 +259,4 @@ long constrainLong(long value, long min_value, long max_value) {
   if(value < min_value) return min_value;
   return value;
 }
+

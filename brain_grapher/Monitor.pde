@@ -83,7 +83,7 @@ class Monitor {
  		label.draw(parent);		
 	}
 	
-	
+
 
 }
 
