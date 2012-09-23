@@ -6,7 +6,12 @@ import processing.net.*;
 ControlP5 controlP5;
 ControlFont font;
 
-Client myClient; 
+Client myClient;
+Client tomClient;
+String tomData;                       // string to hold incoming data
+String tomIp = "128.122.151.164";
+int pAttnValue = 0;
+int pDeltaValue = 0;
 Channel[] channels = new Channel[11];
 Monitor[] monitors = new Monitor[10];
 Graph graph;
@@ -28,8 +33,7 @@ void setup() {
 	// controlP5.setColorActive(color(0));	
 	
 	font = new ControlFont(createFont("DIN-MediumAlternate", 12), 12);
-	
-
+    
         // Connect to ThinkGear socket (default = 127.0.0.1:13854)
         // By default, Thinkgear only binds to localhost:
         // To allow other hosts to connect and run Processing from another machine, run ReplayTCP (http://www.dlcsistemas.com/html/relay_tcp.html)
@@ -54,7 +58,9 @@ void setup() {
         println (command);
         myClient.write(command);
         
-        
+        //instantiate tomClient
+        println("connecting to tom's ip");
+        tomClient = new Client(this, tomIp, 8080);	
 	
 	// Creat the channel objects
 	// yellow to purple and then the space in between, grays for the alphas
@@ -101,6 +107,17 @@ void setup() {
 
 void draw() {
   	
+        //if there's data from tom's server, log the data
+
+       if (tomClient.available() > 0) {
+          println("data from tom");
+          // get the data:
+          tomData = tomClient.readString(); 
+          background(#000045);
+          fill(#eeeeff);
+          println(tomData);
+        } 
+  
 	// find the global max
 	if(scaleMode == "Global") {
 		if(channels.length > 3) {
@@ -122,8 +139,34 @@ void draw() {
 		monitors[i].update();
 		monitors[i].draw();
 
-                println("monitoring channel 0");
-                println(monitors[0].currentValue);
+                int curAttnValue = monitors[0].currentValue;
+                int curDeltaValue = monitors[3].currentValue;
+
+                if(pAttnValue < curAttnValue){
+                  
+                  println("writing l");
+                  tomClient.write('l');
+                  
+                } else if (pAttnValue > curAttnValue){
+                  
+                  println("writing r");
+                  tomClient.write('r');
+                  
+                } else if (pDeltaValue < curDeltaValue){
+                          
+                  println("writing u");
+                  tomClient.write('u');        
+                  
+                } else if (pDeltaValue > curDeltaValue){
+                          
+                  println("writing d");
+                  tomClient.write('d');        
+                  
+                }
+
+                pAttnValue = curAttnValue;
+                pDeltaValue = curDeltaValue;
+                
 	}
 	
 	
