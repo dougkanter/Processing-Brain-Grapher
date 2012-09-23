@@ -146,7 +146,7 @@ void draw() {
                 int curAVZone = 2;
                 int curDVZone = 2;
                 
-                if(curAttnValue>=100 && curAttnValue<120){
+                if(curAttnValue<120){
                   curAVZone = 1;
                 } else if (curAttnValue>=120 && curAttnValue<140){
                   curAVZone = 2;
@@ -162,11 +162,80 @@ void draw() {
                   curAVZone = 7; 
                 } else if (curAttnValue>=240 && curAttnValue<260){
                   curAVZone = 8;
-                } else if (curAttnValue>=260 && curAttnValue<=280){
+                } else if (curAttnValue>=260){
                   curAVZone = 9;
                 }
+
+                if(curDeltaValue<50){
+                  curDVZone = 1;
+                } else if (curDeltaValue>=50 && curDeltaValue<60){
+                  curDVZone = 2;
+                } else if (curDeltaValue>=60 && curDeltaValue<70){
+                  curDVZone = 3;
+                } else if (curDeltaValue>=70 && curDeltaValue<80){
+                  curDVZone = 4;
+                } else if (curDeltaValue>=80 && curDeltaValue<90){
+                  curDVZone = 5;
+                } else if (curDeltaValue>=90 && curDeltaValue<100){
+                  curDVZone = 6;
+                } else if (curDeltaValue>=100 && curDeltaValue<110){
+                  curDVZone = 7; 
+                } else if (curDeltaValue>=110 && curDeltaValue<120){
+                  curDVZone = 8;
+                } else if (curDeltaValue>=120 && curDeltaValue<=130){
+                  curDVZone = 9;
+                } else if (curDeltaValue>=130 && curDeltaValue<140){
+                  curDVZone = 10;
+                } else if (curDeltaValue>=140 && curDeltaValue<150){
+                  curDVZone = 11;
+                } else if (curDeltaValue>=150 && curDeltaValue<160){
+                  curDVZone = 12;
+                } else if (curDeltaValue>=160 && curDeltaValue<170){
+                  curDVZone = 13;
+                } else if (curDeltaValue>=170 && curDeltaValue<180){
+                  curDVZone = 14;
+                } else if (curDeltaValue>=180 && curDeltaValue<190){
+                  curDVZone = 15; 
+                } else if (curDeltaValue>=190 && curDeltaValue<200){
+                  curDVZone = 16;
+                } else if (curDeltaValue>=200 && curDeltaValue<210){
+                  curDVZone = 17;
+                } else if (curDeltaValue>=210 && curDeltaValue<220){
+                  curDVZone = 18;
+                } else if (curDeltaValue>=220 && curDeltaValue<230){
+                  curDVZone = 19;
+                } else if (curDeltaValue>=230 && curDeltaValue<240){
+                  curDVZone = 20;
+                } else if (curDeltaValue>=240 && curDeltaValue<250){
+                  curDVZone = 21;
+                } else if (curDeltaValue>=250 && curDeltaValue<260){
+                  curDVZone = 22;
+                } else if (curDeltaValue>=260 && curDeltaValue<270){
+                  curDVZone = 23; 
+                } else if (curDeltaValue>=270 && curDeltaValue<280){
+                  curDVZone = 24;
+                } else if (curDeltaValue>=280 && curDeltaValue<290){
+                  curDVZone = 25;
+                } else if (curDeltaValue>=290 && curDeltaValue<300){
+                  curDVZone = 26;
+                } else if (curDeltaValue>=300 && curDeltaValue<310){
+                  curDVZone = 27;
+                } else if (curDeltaValue>=310 && curDeltaValue<320){
+                  curDVZone = 28;
+                } else if (curDeltaValue>=320 && curDeltaValue<330){
+                  curDVZone = 29;
+                } else if (curDeltaValue>=330 && curDeltaValue<340){
+                  curDVZone = 30;
+                } else if (curDeltaValue>=340 && curDeltaValue<350){
+                  curDVZone = 31; 
+                } else if (curDeltaValue>=350){
+                  curDVZone = 32;
+                }             
                 
-                println("curAttnValue: " + curAttnValue + " pAttnValue: " + pAttnValue + " curAVZone: " + curAVZone + " pAVZone: " + pAVZone);
+                println("HORIZONTAL: " + curAttnValue + " , " + pAttnValue + " , " + curAVZone + " , " + pAVZone);
+//                println("curAttnValue: " + curAttnValue + " pAttnValue: " + pAttnValue + " curAVZone: " + curAVZone + " pAVZone: " + pAVZone);
+                println("VERTICAL: " + curDeltaValue + " , " + pDeltaValue + " , "  + curDVZone + " , "  + pDVZone);
+
                 if(pAVZone < curAVZone){
                   
                   println("writing r");
