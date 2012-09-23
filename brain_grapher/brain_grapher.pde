@@ -121,6 +121,9 @@ void draw() {
 	for (int i = 0; i < monitors.length; i++) {
 		monitors[i].update();
 		monitors[i].draw();
+
+                println("monitoring channel 0");
+                println(monitors[0].currentValue);
 	}
 	
 	
